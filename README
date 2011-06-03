@@ -7,8 +7,8 @@ Usage examples:
   python hostscan.py domain1.com domain2.com [...]
 
 More information:
-  ./domainscan -h
-  ./hostscan -h
+  python domainscan.py -h
+  python hostscan.py -h
 
 Extending:
   Write a module in checks/, then add that to the top of either hostscan.py or domainscan.py. (This process will be improved!)
