@@ -6,8 +6,8 @@ allowing read access to your configuration files.
 Usage examples:
   * python domainscan.py domain.com
   * python domainscan.py domain1.com domain2.com [...]
-  * python hostscan.py domain.com
-  * python hostscan.py domain1.com domain2.com [...]
+  * python hostscan.py host.domain.com
+  * python hostscan.py host1.domain.com host2.domain.com [...]
 
 More information:
   * python domainscan.py -h
