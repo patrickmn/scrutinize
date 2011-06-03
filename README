@@ -1,0 +1,12 @@
+Scrutinize is an extensible misconfiguration scanner--not a vulnerability scanner, use Metasploit for that--written using Twisted. It checks for common misconfigurations such as allowing DNS Zone Transfer for your domain, not having a PTR record, or allowing read access to your configuration files.
+
+Usage examples:
+  ./domainscan patrickmylund.com
+  ./hostscan patrickmylund.com
+
+More information:
+  ./domainscan -h
+  ./hostscan -h
+
+Extending:
+  Write a module in checks/, then add that to the top of either hostscan.py or domainscan.py. (This process will be improved!)
