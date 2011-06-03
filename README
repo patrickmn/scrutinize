@@ -13,6 +13,10 @@ More information:
   * python domainscan.py -h
   * python hostscan.py -h
 
+  To improve performance, increase the throttle limit with the -t switch, or
+  set throttle in config.py. If you experience excessive connection timeouts,
+  lower it.
+
 Extending:
   Write a module in checks/, then add that to the top of either hostscan.py or
   domainscan.py. (Improving this process is at the top of my to-do list.)
