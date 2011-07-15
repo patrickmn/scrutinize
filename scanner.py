@@ -103,3 +103,6 @@ class DomainScanner(Scanner):
 
 class HostScanner(Scanner):
     pass
+
+class LocalScanner(Scanner):
+    pass

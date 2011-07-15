@@ -27,4 +27,5 @@ class TestSemMap(unittest.TestCase):
     def validate(self, _):
         self.assertTrue(
             len(self.got) == len(self.stuff) and
-            set(self.got).issubset(set(self.stuff)))
+            set(self.got).issubset(set(self.stuff))
+        )

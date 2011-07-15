@@ -158,12 +158,9 @@ class ZoneTransferRefused(DomainCheck):
 class MXRecordsExist(DomainCheck):
     """MX records exist"""
 
-    def __init__(self, *args, **kwargs):
-        super(MXRecordsExist, self).__init__(*args, **kwargs)
-        self.resolver = getResolver()
-
     def run(self):
-        d = (self.resolver.lookupMailExchange(self.target)
+        r = getResolver()
+        d = (r.lookupMailExchange(self.target)
              .addCallback(lambda (ans, auth, add): self.setResult(bool(ans))))
         return d
 

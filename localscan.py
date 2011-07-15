@@ -7,43 +7,35 @@ except:
 
 import sys
 from twisted.internet import defer
+from twisted.python.failure import Failure
 
 import common
 from cli import BaseCLI
 from cli import ArgParser
-from scanner import DomainScanner
+from scanner import LocalScanner
+from err import ScrutinizeException
+from color import colorize
 
-import checks.net.dns
-import checks.net.httpd
-import checks.net.ssl
-domainChecks = (
-    checks.net.dns.ZoneTransferRefused,
-    checks.net.dns.MXRecordsExist,
-    checks.net.httpd.UnexposedFiles,
-    checks.net.ssl.ProperSSL,
-)
-defaultDomainChecks = (
-    checks.net.dns.ZoneTransferRefused,
-    checks.net.dns.MXRecordsExist,
-    checks.net.ssl.ProperSSL,
+import checks.local.blah
+localChecks = (
+    checks.local.blah.bloo,
 )
 
-class DomainScanCLI(BaseCLI):
+class LocalScanCLI(BaseCLI):
 
     def __init__(self):
-        super(DomainScanCLI, self).__init__()
-        self.scanner = DomainScanner
-        self.checks = defaultDomainChecks
+        super(LocalScanCLI, self).__init__()
+        self.scanner = LocalScanner
+        self.checks = localChecks
 
         p = ArgParser(
-            description = 'Scrutinize Domain Scanner',
-            epilog = 'Use @ to read arguments from file, e.g.: {0} @domainlist.txt'.format(sys.argv[0]),
+            description = 'Scrutinize Local Scanner',
             fromfile_prefix_chars='@',
         )
         p.add_argument('-c', '--checks',
                        nargs = '+',
-                       choices = [x.__module__.replace('checks.', '') + '.' + x.__name__ for x in domainChecks],
-                       metavar = ('net.dns.TestA', 'net.http.TestB'),
+                       choices = [x.__module__.replace('checks.', '') + '.' + x.__name__ for x in localChecks],
+                       metavar = ('local.blah.Bloo', 'local.blah.Blyy'),
                        help = 'specific checks to run')
         p.add_argument('-t', '--throttle',
                        type = int,
@@ -64,10 +56,6 @@ class DomainScanCLI(BaseCLI):
                        action = 'store_true',
                        dest = 'useCheckClassNames',
                        help = 'show names of checks rather than descriptions')
-        p.add_argument('addresses',
-                       nargs = '+',
-                       metavar = 'example.com',
-                       help = 'target domain name(s)')
         self.parser = p
 
     def modifyArgs(self, args):
@@ -76,7 +64,7 @@ class DomainScanCLI(BaseCLI):
         return args
 
 def main():
-    return DomainScanCLI().run()
+    return LocalScanCLI().run()
 
 if __name__ == '__main__':
     main()

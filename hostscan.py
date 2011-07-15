@@ -23,6 +23,9 @@ hostChecks = (
     checks.net.ports.CommonPortScan,
     checks.net.ports.MalwarePortScan,
 )
+defaultHostChecks = (
+    checks.net.dns.ValidRDNS,
+)
 
 class AddressValidityError(ScrutinizeException):
     pass
@@ -32,7 +35,7 @@ class HostScanCLI(BaseCLI):
     def __init__(self):
         super(HostScanCLI, self).__init__()
         self.scanner = HostScanner
-        self.checks = hostChecks
+        self.checks = defaultHostChecks
 
         p = ArgParser(
             description = 'Scrutinize Host Scanner',
