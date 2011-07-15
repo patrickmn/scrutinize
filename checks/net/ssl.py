@@ -79,8 +79,8 @@ class ProperSSL(DomainCheck):
                 self.addSubresult('Certificate key is strong',
                                   not pubkeyBits < 2048,
                                   ('RSA' if pubkeyType == TYPE_RSA else 'DSA') + ' ' + \
-                                  '{0} bit'.format(pubkeyBits) if not pubkeyBits < 2048 else '{0} bit is low'.format(pubkeyBits))
-        self.setResult(self.hasMain, 'Unrecognized root CA, or other error' if not self.hasMain else '')
+                                  ('{0} bit'.format(pubkeyBits) if not pubkeyBits < 2048 else '{0} bit is weak'.format(pubkeyBits)))
+        self.setResult(CHECK_RESULT_SUB if self.hasMain else False, 'Unrecognized root CA, or other error' if not self.hasMain else '')
 
     def run(self):
         url = 'https://{0}/'.format(self.target)
